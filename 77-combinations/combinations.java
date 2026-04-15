@@ -3,21 +3,21 @@ import java.util.*;
 class Solution {
     public List<List<Integer>> combine(int n, int k) {
         List<List<Integer>> result = new ArrayList<>();
-        backtrack(result, new ArrayList<>(), 1, n, k);
+        backtrack(1, n, k, new ArrayList<>(), result);
         return result;
     }
 
-    private void backtrack(List<List<Integer>> result, List<Integer> temp, int start, int n, int k) {
-        // Base case
-        if (temp.size() == k) {
-            result.add(new ArrayList<>(temp));
+    private void backtrack(int start, int n, int k, List<Integer> current, List<List<Integer>> result) {
+        // If combination is ready
+        if (current.size() == k) {
+            result.add(new ArrayList<>(current));
             return;
         }
 
         for (int i = start; i <= n; i++) {
-            temp.add(i);                      // choose
-            backtrack(result, temp, i + 1, n, k);
-            temp.remove(temp.size() - 1);     // backtrack
+            current.add(i);
+            backtrack(i + 1, n, k, current, result);
+            current.remove(current.size() - 1); // backtrack
         }
     }
 }
