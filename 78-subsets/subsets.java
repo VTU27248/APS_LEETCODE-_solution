@@ -3,17 +3,17 @@ import java.util.*;
 class Solution {
     public List<List<Integer>> subsets(int[] nums) {
         List<List<Integer>> result = new ArrayList<>();
-        backtrack(result, new ArrayList<>(), nums, 0);
+        backtrack(0, nums, new ArrayList<>(), result);
         return result;
     }
 
-    private void backtrack(List<List<Integer>> result, List<Integer> temp, int[] nums, int start) {
-        result.add(new ArrayList<>(temp));
+    private void backtrack(int start, int[] nums, List<Integer> current, List<List<Integer>> result) {
+        result.add(new ArrayList<>(current));
 
         for (int i = start; i < nums.length; i++) {
-            temp.add(nums[i]);                 // include
-            backtrack(result, temp, nums, i + 1);
-            temp.remove(temp.size() - 1);      // backtrack
+            current.add(nums[i]);
+            backtrack(i + 1, nums, current, result);
+            current.remove(current.size() - 1); // backtrack
         }
     }
 }
