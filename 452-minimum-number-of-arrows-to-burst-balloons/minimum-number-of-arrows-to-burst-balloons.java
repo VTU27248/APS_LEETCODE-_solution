@@ -1,10 +1,10 @@
-import java.util.*;
+import java.util.Arrays;
 
 class Solution {
     public int findMinArrowShots(int[][] points) {
         if (points.length == 0) return 0;
 
-        // Sort by end
+        // Sort by end coordinate
         Arrays.sort(points, (a, b) -> Integer.compare(a[1], b[1]));
 
         int arrows = 1;
