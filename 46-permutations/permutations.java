@@ -3,32 +3,29 @@ import java.util.*;
 class Solution {
     public List<List<Integer>> permute(int[] nums) {
         List<List<Integer>> result = new ArrayList<>();
-        boolean[] used = new boolean[nums.length];
-
-        backtrack(result, new ArrayList<>(), nums, used);
+        boolean[] visited = new boolean[nums.length];
+        backtrack(nums, visited, new ArrayList<>(), result);
         return result;
     }
 
-    private void backtrack(List<List<Integer>> result, List<Integer> temp, int[] nums, boolean[] used) {
-        // Base case
-        if (temp.size() == nums.length) {
-            result.add(new ArrayList<>(temp));
+    private void backtrack(int[] nums, boolean[] visited, List<Integer> current, List<List<Integer>> result) {
+        // If permutation is complete
+        if (current.size() == nums.length) {
+            result.add(new ArrayList<>(current));
             return;
         }
 
         for (int i = 0; i < nums.length; i++) {
-            if (used[i]) continue;
+            if (visited[i]) continue;
 
-            // Choose
-            used[i] = true;
-            temp.add(nums[i]);
+            visited[i] = true;
+            current.add(nums[i]);
 
-            // Explore
-            backtrack(result, temp, nums, used);
+            backtrack(nums, visited, current, result);
 
             // Backtrack
-            temp.remove(temp.size() - 1);
-            used[i] = false;
+            current.remove(current.size() - 1);
+            visited[i] = false;
         }
     }
 }
