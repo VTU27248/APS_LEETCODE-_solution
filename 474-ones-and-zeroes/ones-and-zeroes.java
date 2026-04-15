@@ -11,11 +11,10 @@ class Solution {
                 else ones++;
             }
 
-            // Traverse backwards (important!)
+            // Traverse backwards (important for 0/1 knapsack)
             for (int i = m; i >= zeros; i--) {
                 for (int j = n; j >= ones; j--) {
-                    dp[i][j] = Math.max(dp[i][j], 
-                                        1 + dp[i - zeros][j - ones]);
+                    dp[i][j] = Math.max(dp[i][j], 1 + dp[i - zeros][j - ones]);
                 }
             }
         }
